@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-md-12">
+      <nb-card class="inline-form-card">
+        <nb-card-header>Login Form</nb-card-header>
+        <nb-card-body>
+            <div class="col-lg-8 off-set-2">
+            <label class="control-label">User Name</label>
+            <input type="text" [(ngModel)]="user" name="user" nbInput fullWidth placeholder="Email">
+            <label class="control-label">Pass Word</label>
+            <input type="password" [(ngModel)]="pass" name="pass" nbInput fullWidth placeholder="">
+            <!-- <nb-checkbox>Remember me</nb-checkbox> -->
+        </div>
+        <hr>
+            <button (click)="Login()"  type="submit" nbButton status="success">Submit</button>
+          <!-- </form> -->
+          <label class="control-label" >Token: {{token}}</label>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>

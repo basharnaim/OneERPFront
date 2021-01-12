@@ -1,0 +1,295 @@
+<nb-card>
+  <nb-card-header>
+    <div class="buttons-row text-right">
+      <!-- <label class="text-left off-set-4"> Header Informetion </label> -->
+      <button type="submit" nbButton status="success" size="small"><i class="fa fa-plus"></i> Create</button>
+      <button type="submit" nbButton status="primary" size="small"><i class="fa fa-plus"></i> Report</button>
+      <button type="submit" nbButton status="success" size="small" (click)="onBtStartAdd('','','')"><i
+          class="fa fa-plus"> </i> Add Row </button>
+    </div>
+  </nb-card-header>
+  <hr>
+  <nb-card-body>
+    <div class="grid-wrapper">
+      <ag-grid-angular #agGrid style="width: 100%; height: 500px;" id="myGrid" class="ag-theme-alpine"
+        [rowData]="rowData" [columnDefs]="columnDefs" [gridOptions]="gridOptions" [defaultColDef]="defaultColDef"
+        [frameworkComponents]="frameworkComponents" [components]="components" [pagination]="true"
+        [paginationAutoPageSize]="true" (gridReady)="onGridReady($event)"></ag-grid-angular>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<br>
+<br>
+<!-- 
+<nb-card>
+  <nb-card-header>
+    <div class="buttons-row text-right">     
+      <button type="submit" nbButton status="success" size="small"><i class="fa fa-list"> </i> Showlist</button>
+      <button type="submit" nbButton status="primary" size="small"><i class="fa fa-recycle"> </i> Refesh</button>
+      <button type="submit" nbButton status="success" size="small" (click)="onBtStartAdd('','','')"> <i
+          class="fa fa-plus"> </i> Save </button>
+    </div>
+  </nb-card-header>
+  <hr>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-3">
+        <input type="text" nbInput fullWidth placeholder="Text" />
+      </div>
+      <div class="col-3">
+        <input type="text" nbInput fullWidth placeholder="Dropdown" />
+      </div>
+      <div class="col-3">
+        <input type="text" nbInput fullWidth placeholder="Disabled input" />
+        <input type="text" nbInput fullWidth placeholder="Disabled input" disabled />
+        <textarea rows="5" nbInput fullWidth shape="round" placeholder="Text Area"></textarea>
+      </div>
+      <div class="col-3">
+        <input type="text" nbInput fullWidth placeholder="Disabled input" />
+        <input type="text" nbInput fullWidth placeholder="Disabled input" disabled />
+        <textarea rows="5" nbInput fullWidth shape="round" placeholder="Text Area"></textarea>
+      </div>
+    </div>
+
+    <div class="grid-wrapper">
+      <ag-grid-angular #agGrid style="width: 100%; height: 500px;" id="myGrid" class="ag-theme-alpine"
+        [rowData]="rowData" [columnDefs]="columnDefs" [gridOptions]="gridOptions" [defaultColDef]="defaultColDef"
+        [frameworkComponents]="frameworkComponents" [components]="components" [pagination]="true"
+        [paginationAutoPageSize]="true" (gridReady)="onGridReady($event)"></ag-grid-angular>
+    </div>
+  </nb-card-body>
+</nb-card> -->
+
+
+<br>
+<br>
+
+<nb-card>
+  <nb-card-header>
+    <div class="buttons-row text-right">
+      <!-- <label class="text-left off-set-4"> Header Informetion </label> -->
+      <button type="submit" nbButton status="success" size="small"><i class="fa fa-list"> </i> Showlist</button>
+      <button type="submit" nbButton status="primary" size="small"><i class="fa fa-recycle"> </i> Refesh</button>
+      <button type="submit" nbButton status="success" size="small" (click)="onBtStartAdd('','','')"> <i
+          class="fa fa-plus"> </i> Save </button>
+    </div>
+  </nb-card-header>
+  <hr>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-3">
+        <input type="text" nbInput fullWidth placeholder="Disabled input" />
+        <input type="text" nbInput fullWidth placeholder="Disabled input" disabled />
+        <textarea rows="5" nbInput fullWidth shape="round" placeholder="Text Area"></textarea>
+      </div>
+      <div class="col-3">
+
+        <h1>Angular Multiselect Dropdown with Search - ItSolutionStuff.com</h1>
+        <ng-select [items]="categories" bindLabel="name" placeholder="Select Category" appendTo="body" multiple="true"
+          [(ngModel)]="selected">
+        </ng-select>
+
+        <button (click)="getSelectedValue()">Get Selected Values</button>
+        <input type="text" nbInput fullWidth placeholder="Disabled input" />
+        <h1>Angular ng-select <small class="text-muted"><a target="_blank"
+              href="https://github.com/ng-select/ng-select">Open in Github</a></small></h1>
+        <label>Your first ng-select</label>
+        <ng-select [items]="cities" bindLabel="name" placeholder="Select city" [(ngModel)]="selectedCity">
+        </ng-select>
+        <p>
+          Selected city: {{selectedCity | json}}
+        </p>
+        <hr />
+        <label>Multiselect with custom bindings</label>
+        <ng-select [items]="cities2" bindLabel="name" bindValue="id" [multiple]="true" placeholder="Select cities"
+          [(ngModel)]="selectedCityIds">
+        </ng-select>
+        <p>
+          Selected cities: {{selectedCityIds}}
+        </p>
+        <hr />
+        <label>Custom tags</label>
+        <ng-select [items]="users" bindLabel="name" bindValue="id" [addTag]="addCustomUser" [multiple]="true"
+          placeholder="Select user or add custom tag" [(ngModel)]="selectedUserIds">
+        </ng-select>
+        <p>
+          Selected user: {{selectedUserIds}}
+        </p>
+        <hr />
+        <label>Custom templates</label>
+        <ng-select [items]="cities3" bindLabel="name" bindValue="name" placeholder="Select city"
+          [(ngModel)]="selectedCityName">
+          <ng-template ng-header-tmp>
+            Custom header
+          </ng-template>
+          <ng-template ng-label-tmp let-item="item">
+            <img height="15" width="15" [src]="item.avatar" />
+            <b>{{item.name}}</b> is cool
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+            <img height="15" width="15" [src]="item.avatar" />
+            <b>{{item.name}}</b>
+          </ng-template>
+          <ng-template ng-footer-tmp>
+            Custom footer
+          </ng-template>
+        </ng-select>
+        <p>
+          Selected city: {{selectedCityName}}
+        </p>
+        <hr />
+        <label>Hight performance. Handles even 10000 items.</label>
+        <ng-select [items]="cities4" [virtualScroll]="true" bindLabel="name" bindValue="id" placeholder="Select city"
+          [(ngModel)]="selectedCityId">
+        </ng-select>
+        <p>
+          Selected city ID: {{selectedCityId}}
+        </p>
+        <hr />
+        <label>Append dropdown to body</label>
+        <ng-select [items]="cities4" bindLabel="name" [virtualScroll]="true" bindValue="id" appendTo="body"
+          placeholder="Select city" [(ngModel)]="selectedCityId">
+        </ng-select>
+        <p>
+          Selected city ID: {{selectedCityId}}
+        </p>
+        <hr />
+        <label>Grouping</label>
+        <ng-select [items]="accounts" bindLabel="name" bindValue="name" groupBy="country" [(ngModel)]="selectedAccount">
+        </ng-select>
+        <div style="margin-top:300px"></div>
+      </div>
+      <div class="col-3">
+        <nb-card-footer>
+          <button nbButton (click)="makeToast()">Show toast</button>
+          <button nbButton status="success" (click)="openRandomToast()">Random toast</button>
+        </nb-card-footer>
+      </div>
+      <div class="col-3">
+        <div class="validation-checkboxes">
+          <nb-checkbox status="success">Success </nb-checkbox>
+          <nb-checkbox status="warning">Warning </nb-checkbox>
+          <nb-checkbox status="danger">Danger </nb-checkbox>
+        </div>
+        <div class="demo-items">
+          <nb-radio-group [(value)]="radioGroupValue">
+            <nb-radio [value]="'value 1'"> Radio 1 </nb-radio>
+            <nb-radio [value]="'value 2'"> Radio 2 </nb-radio>
+            <nb-radio [value]="'value 3'"> Radio 3 </nb-radio>
+          </nb-radio-group>
+          <input nbInput placeholder="Input Date" [nbDatepicker]="formpicker">
+          <nb-datepicker #formpicker></nb-datepicker>
+          <input nbInput type="date" placeholder="Input Date" />
+          <!-- <ngb-datepicker (select)="onDateSelect($event)" style></ngb-datepicker> -->
+          <!-- <nb-datepicker (select)="onDateSelect($event)" style></nb-datepicker> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-wrapper">
+      <div class="example-header">
+        Page Size:
+        <select (change)="onPageSizeChanged(10)" id="page-size">
+          <option value="10" selected="">10</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+          <option value="1000">1000</option>
+        </select>
+      </div>
+      <ag-grid-angular #agGrid style="width: 100%; height: 500px;" id="myGrid" class="ag-theme-alpine"
+        [rowData]="rowData" [columnDefs]="columnDefs_" [autoGroupColumnDef]="autoGroupColumnDef"
+        [gridOptions]="gridOptions" [defaultColDef]="defaultColDef" [components]="components"
+        [frameworkComponents]="frameworkComponents" [pagination]="true" [paginationAutoPageSize]="true"
+        (gridReady)="onGridReady($event)"></ag-grid-angular>
+    </div>
+  </nb-card-body>
+</nb-card>
+<br>
+<br>
+<br>
+<br>
+
+<div class="row">
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-header>Default Inputs</nb-card-header>
+      <nb-card-body>
+        <input type="text" nbInput fullWidth placeholder="Project">
+        <div class="full-name-inputs">
+          <input type="text" nbInput fullWidth placeholder="Nick">
+          <input type="text" nbInput fullWidth placeholder="Last Name">
+        </div>
+        <input type="password" nbInput fullWidth placeholder="Password">
+        <input type="text" nbInput fullWidth shape="rectangle" placeholder="Rectangle border">
+        <input type="text" nbInput fullWidth shape="semi-round" placeholder="Semi-round border">
+        <input type="text" nbInput fullWidth shape="round" placeholder="Rounded border">
+        <input type="text" nbInput fullWidth placeholder="Disabled input" disabled />
+        <textarea rows="5" nbInput fullWidth shape="round" placeholder="Text Area"></textarea>
+        <input type="text" nbInput fullWidth fieldSize="small" placeholder="Small Input">
+        <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Medium Input">
+        <input type="text" nbInput fullWidth fieldSize="large" placeholder="Large Input">
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="col-lg-6">
+
+    <nb-card>
+      <nb-card-header>Select</nb-card-header>
+      <nb-card-body>
+        <nb-select selected="1">
+          <nb-option value="1">Option 1</nb-option>
+          <nb-option value="2">Option 2</nb-option>
+        </nb-select>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card>
+      <nb-card-header>Validation States</nb-card-header>
+      <nb-card-body>
+        <input type="text" nbInput fullWidth status="info" placeholder="Input with Info">
+        <input type="text" nbInput fullWidth status="success" placeholder="Warning Input">
+        <input type="text" nbInput fullWidth status="warning" placeholder="Danger Input">
+        <input type="text" nbInput fullWidth status="danger" placeholder="Danger Input">
+        <input type="text" nbInput fullWidth status="primary" placeholder="Input with Primary">
+        <div class="validation-checkboxes">
+          <nb-checkbox status="success">Success Checkbox</nb-checkbox>
+          <nb-checkbox status="warning">Warning Checkbox</nb-checkbox>
+          <nb-checkbox status="danger">Danger Checkbox</nb-checkbox>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card>
+      <nb-card-header>Checkboxes & Radios</nb-card-header>
+      <nb-card-body class="checkbox-radio">
+        <div class="demo-items">
+          <nb-checkbox>Checkbox 1</nb-checkbox>
+          <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
+        </div>
+        <div class="demo-items">
+          <nb-radio-group [(value)]="radioGroupValue">
+            <nb-radio [value]="'This is value 1'">
+              Radio 1
+            </nb-radio>
+            <nb-radio [value]="'This is value 2'">
+              Radio 2
+            </nb-radio>
+            <nb-radio [value]="'This is value 3'">
+              Radio 3
+            </nb-radio>
+          </nb-radio-group>
+        </div>
+        <div class="demo-items">
+          <nb-checkbox disabled>Disabled Checkbox</nb-checkbox>
+          <nb-radio-group disabled>
+            <nb-radio [value]="'Disabled Value'">
+              Disabled Radio
+            </nb-radio>
+          </nb-radio-group>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
